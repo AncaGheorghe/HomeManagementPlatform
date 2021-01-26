@@ -36,29 +36,32 @@ export class LoginComponent implements OnInit {
     console.log('testul vietii' + this.form.email + this.form.password);
 
     this.authService.login(email, password).subscribe(
-      (response : any) => {
-        console.log("response + " +  response.get("Authorization"))
+      response => {
+        console.log("bag..." + response);
+        this.tokenStorage.saveToken(response);
+        //this.tokenStorage.saveUser(response);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.router.navigate(['/home']);
       },
       err => {
-        this.errorMessage = err.error;
-
-        console.log(this.errorMessage);
-        // console.log(this.errorMessage.text);
-        let token = null != this.errorMessage ? this.errorMessage.text : null;
-        if(null != token){
-        this.tokenStorage.saveToken(this.errorMessage.text);
-          this.tokenStorage.saveUser(this.errorMessage.text);
-
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          this.router.navigate(['/home']);
-      } else {
+        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-
       }
-    }
     );
 
+    // this.authService.login(email, password)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       console.log('skrrr' + data);
+    //       this.router.navigate(['/home']);
+    //     },
+    //     error => {
+    //       this.errorMessage = error.error.message;
+    //       this.isLoginFailed = true;
+    //     });
   }
 
 }
