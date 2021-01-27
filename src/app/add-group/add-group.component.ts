@@ -65,6 +65,7 @@ export class AddGroupComponent implements OnInit {
   }
 
   addGroupForm(){
+    
     const alreadyManagerInUsersList = this.selectedUsers.find((user) => {
       return user === this.manager;
     });
@@ -75,11 +76,12 @@ export class AddGroupComponent implements OnInit {
 
     this.selectedUsersList = this.selectedUsers;
     for(let i = 0; i < this.selectedUsersList.length; i++){
-      this.usersDtoList[i] = new UserDto(this.id, this.fullname);
-      this.usersDtoList[i].fullname = this.selectedUsersList[i];
+        this.usersDtoList[i] = new UserDto(this.id, this.fullname);
+        this.usersDtoList[i].email = this.selectedUsersList[i];
+      
 
      const foundUser = this.userDto.find((user) => {
-       return user.fullname === this.selectedUsersList[i];
+       return user.email === this.selectedUsersList[i];
      });
 
      if(foundUser){
@@ -92,6 +94,8 @@ export class AddGroupComponent implements OnInit {
       else
         this.usersDtoList[i].isManager = false;
     }
+
+    console.log(this.usersDtoList)
 
     this.groupDto.userDtoSet = this.usersDtoList;
     this.groupDto.name = this.groupName;
@@ -113,10 +117,11 @@ export class AddGroupComponent implements OnInit {
 
 
   getUsers() {
-     this.http.get(this.getUsersUrl, {}).subscribe(response =>{
-      this.userDto = response as UserDto[];
+     this.http.get(this.getUsersUrl, {}).subscribe((response: UserDto[]) =>{
+       console.log("userssss", response)
+      this.userDto = response;
       for(let i = 0; i < this.userDto.length; i++){
-         this.usersList.push(this.userDto[i].fullname);
+         this.usersList.push(this.userDto[i].email);
        }
       console.log("ceva" + this.usersList);
       this.dropdownList = this.usersList;
