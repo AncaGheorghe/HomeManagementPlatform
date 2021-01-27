@@ -23,7 +23,7 @@ export class AddTaskComponent implements OnInit {
   config = {};
   config3 = {};
   id: number = null;
-  fullname: string = '';
+  email: string = '';
   groupId: number = null;
   groupName: string = '';
   selectedUsers: string[];
@@ -170,7 +170,7 @@ export class AddTaskComponent implements OnInit {
   createTask(){
 
     for(let i = 0; i < this.selectedUsers.length; i++){
-      this.usersDtoList[i] = new UserDto(this.id, this.fullname);
+      this.usersDtoList[i] = new UserDto(this.id, this.email);
       this.usersDtoList[i].email = this.selectedUsers[i];
 
       const foundUser = this.userDto.find((user) => {
