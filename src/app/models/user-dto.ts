@@ -4,8 +4,13 @@ export class UserDto {
   fullname: string;
   isManager: boolean;
 
-  constructor(id: number, fullname: string) {
+  constructor(id: number, email: string) {
     this.id = id;
-    this.fullname = fullname;
+    this.email = email;
   }
+
+  // constructor(id: number, email: string) {
+  //   this.id = id;
+  //   this.email = email;
+  // }
 }

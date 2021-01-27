@@ -139,7 +139,7 @@ export class AddTaskComponent implements OnInit {
     this.http.get(this.getUsersUrl, {}).subscribe(response =>{
         this.userDto = response as UserDto[];
         for(let i = 0; i < this.userDto.length; i++){
-          this.usersList.push(this.userDto[i].fullname);
+          this.usersList.push(this.userDto[i].email);
         }
         console.log("ceva" + this.usersList);
         this.dropdownList = this.usersList;
@@ -171,10 +171,10 @@ export class AddTaskComponent implements OnInit {
 
     for(let i = 0; i < this.selectedUsers.length; i++){
       this.usersDtoList[i] = new UserDto(this.id, this.fullname);
-      this.usersDtoList[i].fullname = this.selectedUsers[i];
+      this.usersDtoList[i].email = this.selectedUsers[i];
 
       const foundUser = this.userDto.find((user) => {
-        return user.fullname === this.selectedUsers[i];
+        return user.email === this.selectedUsers[i];
       });
 
       if(foundUser){
