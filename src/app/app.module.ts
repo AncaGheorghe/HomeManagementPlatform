@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +21,11 @@ import { RegisterComponent } from './register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { AddGroupComponent } from './add-group/add-group.component';
+import {SelectDropDownModule} from 'ngx-select-dropdown';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { MyGroupsComponent } from './my-groups/my-groups.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,9 @@ import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
     SidebarComponent,
     NavbarComponent,
     RegisterComponent,
+    AddTaskComponent,
+    AddGroupComponent,
+    MyGroupsComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,8 @@ import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SelectDropDownModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

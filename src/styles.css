@@ -2,3 +2,4 @@
 @import "app/css/main.css";
 @import "assets/vendors/css/vendor.bundle.base.css";
 @import "assets/vendors/mdi/css/materialdesignicons.min.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";

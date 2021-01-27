@@ -51,17 +51,6 @@ export class LoginComponent implements OnInit {
       }
     );
 
-    // this.authService.login(email, password)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       console.log('skrrr' + data);
-    //       this.router.navigate(['/home']);
-    //     },
-    //     error => {
-    //       this.errorMessage = error.error.message;
-    //       this.isLoginFailed = true;
-    //     });
   }
 
 }

@@ -1,0 +1,59 @@
+<div class="container-scroller">
+
+  <app-navbar></app-navbar>
+
+  <div class="container-fluid page-body-wrapper">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row" style="margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Group</h4>
+                <p class="card-description"> Create New Group </p>
+                <form class="forms-sample" name="form"
+                      (ngSubmit)="f.form.valid && submit()"
+                      #f="ngForm"
+                      novalidate>
+                  <div class="form-group">
+                    <label for="exampleInputName1">Group Name</label>
+                    <input type="text" class="form-control" name="groupName" id="exampleInputName1"
+                           [(ngModel)]="groupName" placeholder="Group Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="userDropdown">Assign users</label>
+                    <ng-multiselect-dropdown id="userDropdown"
+                                             [placeholder]="'Select Users'"
+                                             [settings]="config"
+                                             [data]="dropdownList"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             (onDeSelect)="onDeselect($event)"
+                                             (onDeSelectAll)="onDeSelectAll($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group">
+                    <label for="userDropdown2">Select a manager</label>
+                    <ngx-select-dropdown id="userDropdown2" name="manager"
+                                             [config]="config2"
+                                             [options]="dropdownList"
+                                             [(ngModel)]="manager">
+                    </ngx-select-dropdown>
+                  </div>
+                  <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Create Group</button>
+                  <button class="btn btn-light">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->

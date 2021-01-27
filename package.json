@@ -24,6 +24,9 @@
     "@angular/router": "~11.0.6",
     "@auth0/angular-jwt": "^5.0.2",
     "@mdi/font": "^5.9.55",
+    "@ng-select/ng-select": "^5.1.0",
+    "ng-multiselect-dropdown": "^0.2.14",
+    "ngx-select-dropdown": "^1.4.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

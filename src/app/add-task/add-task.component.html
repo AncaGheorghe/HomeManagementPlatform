@@ -1,0 +1,77 @@
+<div class="container-scroller">
+
+  <app-navbar></app-navbar>
+
+  <div class="container-fluid page-body-wrapper">
+
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row" style="margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Task</h4>
+                <p class="card-description"> New Task </p>
+                <form class="forms-sample"
+                      name="form"
+                      (ngSubmit)="f.form.valid && submit()"
+                      #f="ngForm"
+                      novalidate
+                      id="addTask">
+                  <div class="form-group">
+                    <label for="exampleInputName1">Task Name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Task Name"
+                           name="inputGroupName" [(ngModel)]="inputGroupName">
+                  </div>
+                  <div class="form-group">
+                    <label for="userDropdown">Task Category</label>
+                    <ngx-select-dropdown id="userDropdown" name="category"
+                                         [config]="config2"
+                                         [options]="options"
+                                         [(ngModel)]="category">
+                    </ngx-select-dropdown>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleTextarea1">What To Do</label>
+                    <textarea class="form-control" id="exampleTextarea1" rows="4" name="toDo" [(ngModel)]="whatToDo"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="userDropdown2">Assign users</label>
+                    <ng-multiselect-dropdown id="userDropdown2"
+                                             [placeholder]="'Select Users'"
+                                             [settings]="config"
+                                             [data]="dropdownList"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             (onDeSelect)="onDeselect($event)"
+                                             (onDeSelectAll)="onDeSelectAll($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group">
+                    <label for="userDropdown3">Assign a group</label>
+                    <ng-multiselect-dropdown id="userDropdown3"
+                                            [placeholder]="'Select Groups'"
+                                            [settings]="config3"
+                                            [data]="dropdownGroupsList"
+                                             (onSelect)="onItemSelect2($event)"
+                                             (onSelectAll)="onSelectAll2($event)"
+                                             (onDeSelect)="onDeselect2($event)"
+                                             (onDeSelectAll)="onDeSelectAll2($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Create Task</button>
+                  <button class="btn btn-light">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
