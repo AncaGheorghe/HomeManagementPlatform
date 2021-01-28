@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
       response => {
         console.log("bag..." + response);
         this.tokenStorage.saveToken(response);
-        //this.tokenStorage.saveUser(response);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

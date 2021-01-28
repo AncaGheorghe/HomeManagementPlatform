@@ -9,6 +9,61 @@
     <div class="main-panel">
       <div class="content-wrapper">
 
+        <ng-sidebar-container>
+
+          <!-- Page content -->
+          <div ng-sidebar-content>
+            <div class="row" style="margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+              <div class="col-md-12 stretch-card grid-margin">
+                <div class="card bg-gradient-primary  card-img-holder text-white">
+                  <div class="card-body">
+                    <img src="{{circleImage}}" class="card-img-absolute" alt="circle-image" />
+                    <i class="mdi mdi-account-multiple mdi-24px float-right"></i>
+                    <h4 class="mb-5">Group Name:</h4>
+                    <button class="btn btn-light" (click)="toggleSidebar()">Edit Group</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- A sidebar -->
+          <ng-sidebar [(opened)]="opened">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Edit Group</h4>
+                    <form class="forms-sample" name="form"
+                          (ngSubmit)="f.form.valid"
+                          #f="ngForm"
+                          novalidate>
+                      <div class="form-group">
+                        <label for="exampleInputName1">Group Name</label>
+                        <input type="text" class="form-control" name="groupName" id="exampleInputName1"
+                               placeholder="Group Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="userDropdown">Edit Users</label>
+                        <ng-multiselect-dropdown id="userDropdown"
+                                                 [placeholder]="'Select Users'"
+                                                 [settings]="config">
+                        </ng-multiselect-dropdown>
+                      </div>
+                      <div class="form-group">
+                        <label for="userDropdown2">Edit Manager</label>
+                        <ngx-select-dropdown id="userDropdown2"
+                                             [config]="config2">
+                        </ngx-select-dropdown>
+                      </div>
+                      <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Edit Group</button>
+                      <button class="btn btn-light" (click)="toggleSidebar()">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+          </ng-sidebar>
+
+        </ng-sidebar-container>
+
+
       </div>
     </div>
 

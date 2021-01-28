@@ -23,7 +23,7 @@ export class AddGroupComponent implements OnInit {
   manager: string;
   groupName: string;
   errorMessage = '';
-  fullname: string = '';
+  email: string = '';
   id: number = null;
   config = {};
   config2 = {};
@@ -76,7 +76,7 @@ export class AddGroupComponent implements OnInit {
 
     this.selectedUsersList = this.selectedUsers;
     for(let i = 0; i < this.selectedUsersList.length; i++){
-      this.usersDtoList[i] = new UserDto(this.id, this.fullname);
+      this.usersDtoList[i] = new UserDto(this.id, this.email);
       this.usersDtoList[i].email = this.selectedUsersList[i];
       
 
@@ -94,8 +94,6 @@ export class AddGroupComponent implements OnInit {
       else
         this.usersDtoList[i].isManager = false;
     }
-
-    console.log(this.usersDtoList)
 
     this.groupDto.userDtoSet = this.usersDtoList;
     this.groupDto.name = this.groupName;
@@ -117,9 +115,8 @@ export class AddGroupComponent implements OnInit {
 
 
   getUsers() {
-     this.http.get(this.getUsersUrl, {}).subscribe((response: UserDto[]) =>{
-       console.log("userssss", response)
-      this.userDto = response;
+     this.http.get(this.getUsersUrl, {}).subscribe(response =>{
+      this.userDto = response as UserDto[];
       for(let i = 0; i < this.userDto.length; i++){
          this.usersList.push(this.userDto[i].email);
        }

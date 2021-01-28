@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {UserDto} from '../models/user-dto';
 import {GroupDto} from '../models/group-dto';
 import {CreateTaskDto} from '../models/createTaskDto';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -46,7 +47,7 @@ export class AddTaskComponent implements OnInit {
   getGroupsUrl = environment.apiBase + '/groups';
   createTaskUrl = environment.apiBase + '/tasks/add-edit';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.selectedUsers = [];
     this.userDto = [];
     this.usersList = [];
@@ -217,19 +218,10 @@ export class AddTaskComponent implements OnInit {
     this.createTask().subscribe(
       response => {
         console.log('something' + response);
+        this.router.navigate(['/home']);
       },
       err => {
         this.errorMessage = err.error.message;
-      }
-    );
-
-    this.refreshForm();
-  }
-
-  refreshForm(){
-    var resetForm = <HTMLFormElement>document.getElementById('addTask');
-    resetForm.reset();
-    this.selectedUsers = [];
-    this.selectedGroups = [];
+      });
   }
 }
