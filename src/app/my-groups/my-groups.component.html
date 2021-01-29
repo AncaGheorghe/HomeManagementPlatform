@@ -13,14 +13,14 @@
 
           <!-- Page content -->
           <div ng-sidebar-content>
-            <div class="row" style="margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
-              <div class="col-md-12 stretch-card grid-margin">
+            <div class="row" style=" margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+              <div class="col-md-12 stretch-card grid-margin" *ngFor="let group of dropdownGroupsList">
                 <div class="card bg-gradient-primary  card-img-holder text-white">
                   <div class="card-body">
                     <img src="{{circleImage}}" class="card-img-absolute" alt="circle-image" />
                     <i class="mdi mdi-account-multiple mdi-24px float-right"></i>
-                    <h4 class="mb-5">Group Name:</h4>
-                    <button class="btn btn-light" (click)="toggleSidebar()">Edit Group</button>
+                    <h4 class="mb-5">{{group}}</h4>
+                    <button class="btn btn-light" (click)="slideToggleSidebar(); takeId(group)">Edit Group</button>
                   </div>
                 </div>
               </div>
@@ -28,34 +28,45 @@
           </div>
 
           <!-- A sidebar -->
-          <ng-sidebar [(opened)]="opened">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Edit Group</h4>
+          <ng-sidebar [(opened)]="opened" position="right" mode="push" autoCollapseWidth=100>
+                <div class="card set-card">
+                  <div class="card-body card-align">
+                    <h4 class="card-title form-title">Edit Group</h4>
                     <form class="forms-sample" name="form"
-                          (ngSubmit)="f.form.valid"
+                          (ngSubmit)="f.form.valid && submit()"
                           #f="ngForm"
                           novalidate>
-                      <div class="form-group">
+                      <div class="form-group2">
                         <label for="exampleInputName1">Group Name</label>
                         <input type="text" class="form-control" name="groupName" id="exampleInputName1"
-                               placeholder="Group Name">
+                               placeholder="Group Name" [(ngModel)]="groupName">
                       </div>
-                      <div class="form-group">
+                      <div class="form-group2">
                         <label for="userDropdown">Edit Users</label>
-                        <ng-multiselect-dropdown id="userDropdown"
+                        <ng-multiselect-dropdown id="userDropdown" name="users"
                                                  [placeholder]="'Select Users'"
-                                                 [settings]="config">
+                                                 [settings]="config"
+                                                 [data]="dropdownList"
+                                                 [(ngModel)]="selectedUsers"
+                                                 (onSelect)="onItemSelect($event)"
+                                                 (onSelectAll)="onSelectAll($event)"
+                                                 (onDeSelect)="onDeselect($event)"
+                                                 (onDeSelectAll)="onDeSelectAll($event)">
                         </ng-multiselect-dropdown>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group2">
                         <label for="userDropdown2">Edit Manager</label>
-                        <ngx-select-dropdown id="userDropdown2"
-                                             [config]="config2">
+                        <ngx-select-dropdown id="userDropdown2" name="manager"
+                                             [config]="config2"
+                                             [options]="dropdownList"
+                                             [(ngModel)]="manager">
                         </ngx-select-dropdown>
                       </div>
-                      <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Edit Group</button>
-                      <button class="btn btn-light" (click)="toggleSidebar()">Cancel</button>
+                      <div class="button-align">
+                        <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Edit Group</button>
+                        <button class="btn btn-light" (click)="slideToggleSidebar()">Cancel</button>
+                      </div>
+
                     </form>
                   </div>
                 </div>
