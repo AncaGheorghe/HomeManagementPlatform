@@ -32,4 +32,17 @@
   margin-bottom: 5.5rem;
 }
 
+::ng-deep .multiselect-dropdown .dropdown-btn .selected-item{
+  background: linear-gradient(to right, #da8cff, #9a55ff) !important;
+  border: 1px solid!important;
+}
+
+::ng-deep .multiselect-dropdown .multiselect-item-checkbox .input[type=checkbox]:checked + div:before{
+  background: linear-gradient(to right, #da8cff, #9a55ff) !important;
+}
+
+::ng-deep .multiselect-dropdown .multiselect-item-checkbox .input[type=checkbox] + div:before{
+  color: #9a55ff;
+}
+
 
