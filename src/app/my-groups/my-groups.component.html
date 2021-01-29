@@ -33,11 +33,11 @@
                   <div class="card-body card-align">
                     <h4 class="card-title form-title">Edit Group</h4>
                     <form class="forms-sample" name="form"
-                          (ngSubmit)="f.form.valid && submit()"
+                          (ngSubmit)="f.form.valid"
                           #f="ngForm"
                           novalidate>
                       <div class="form-group2">
-                        <label for="exampleInputName1">Group Name</label>
+                        <label for="exampleInputName1">Edit Group Name</label>
                         <input type="text" class="form-control" name="groupName" id="exampleInputName1"
                                placeholder="Group Name" [(ngModel)]="groupName">
                       </div>
@@ -47,7 +47,7 @@
                                                  [placeholder]="'Select Users'"
                                                  [settings]="config"
                                                  [data]="dropdownList"
-                                                 [(ngModel)]="selectedUsers"
+                                                 [(ngModel)]="listForDropdown"
                                                  (onSelect)="onItemSelect($event)"
                                                  (onSelectAll)="onSelectAll($event)"
                                                  (onDeSelect)="onDeselect($event)"
@@ -63,8 +63,8 @@
                         </ngx-select-dropdown>
                       </div>
                       <div class="button-align">
-                        <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid">Edit Group</button>
-                        <button class="btn btn-light" (click)="slideToggleSidebar()">Cancel</button>
+                        <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid" (click)="submit()">Edit Group</button>
+                        <button class="btn btn-light" (click)=" deleteGroup()">Delete Group</button>
                       </div>
 
                     </form>
