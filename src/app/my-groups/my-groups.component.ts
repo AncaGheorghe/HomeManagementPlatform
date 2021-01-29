@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {GroupDto} from "../models/group-dto";
 import {UserDto} from "../models/user-dto";
 import {environment} from "../../environments/environment";
+import {newArray} from "@angular/compiler/src/util";
 
 declare function require(path: string);
 
@@ -24,8 +25,7 @@ export class MyGroupsComponent implements OnInit {
   userDto: UserDto[];
   getUsersUrl = environment.apiBase + '/users';
   postGroupUrl = environment.apiBase + '/groups/add-edit';
-  getGroupsUrl = environment.apiBase + '/groups/current-user';
-  deleteGroupUrl = environment.apiBase + '/groups';
+  getGroupsUrl = environment.apiBase + '/groups';
   usersList: string[];
   dropdownList: string[];
   selectedUsers: string[];
@@ -41,7 +41,7 @@ export class MyGroupsComponent implements OnInit {
   groupNameList: string[];
   dropdownGroupsList: string[];
   idForGroups: number;
-  listForDropdown: string[];
+  length: number
 
   constructor(private http: HttpClient, private router: Router) {
     this.userDto = [];
@@ -54,7 +54,6 @@ export class MyGroupsComponent implements OnInit {
     this.groupDto2 = [];
     this.groupNameList = [];
     this.dropdownGroupsList = [];
-    this.listForDropdown = [];
   }
 
   ngOnInit(): void {
@@ -96,33 +95,13 @@ export class MyGroupsComponent implements OnInit {
       this.groupName = groupName;
 
       for (let i = 0; i < group.userDtoSet.length; i++){
-        this.selectedUsers.push(group.userDtoSet[i].email);
+        this.selectedUsers[i] = group.userDtoSet[i].email;
 
         if(group.userDtoSet[i].isManager){
           this.manager = group.userDtoSet[i].email;
         }
       }
-
-      console.log("teeest2  " + this.selectedUsers);
-      this.listForDropdown = this.selectedUsers;
-      console.log("teeest345  " + this.listForDropdown);
     }
-  }
-
-  deleteThisGroup(){
-    return this.http.delete(this.deleteGroupUrl + '/' + this.idForGroups);
-  }
-
-  deleteGroup(){
-    this.deleteThisGroup().subscribe(
-      response => {
-        console.log('something' + response);
-        this.reloadPage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-      }
-    );
   }
 
   addGroupForm(){
@@ -160,6 +139,10 @@ export class MyGroupsComponent implements OnInit {
     this.groupDto.name = this.groupName;
     this.groupDto.id = this.idForGroups;
 
+    if(!alreadyManagerInUsersList){
+      this.selectedUsers.push(this.manager);
+    }
+
     return this.http.post(this.postGroupUrl, this.groupDto);
   }
 
@@ -167,7 +150,7 @@ export class MyGroupsComponent implements OnInit {
     this.addGroupForm().subscribe(
       response => {
         console.log('something' + response);
-        this.reloadPage();
+        //this.slideToggleSidebar();
       },
       err => {
         this.errorMessage = err.error.message;
@@ -227,9 +210,5 @@ export class MyGroupsComponent implements OnInit {
       });
     console.log("teest" + this.dropdownGroupsList);
     return this.dropdownGroupsList;
-  }
-
-  reloadPage(){
-    window.location.reload();
   }
 }
