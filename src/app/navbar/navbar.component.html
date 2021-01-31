@@ -17,6 +17,12 @@
       </form>
     </div>
     <ul class="navbar-nav navbar-nav-right">
+      <li class="nav-item nav-profile dropdown">
+          <div class="nav-profile-text">
+            <i class="mdi mdi-account-circle menu-icon mr-1" style="color: #9a55ff"></i>
+            <span class="menu-title mr-3">{{currentUser.fullname}}</span>
+          </div>
+      </li>
       <li class="nav-item nav-logout d-none d-lg-block">
         <button class="btn bg-gradient-primary mr-2 text-white" (click)="logout()">LOGOUT</button>
       </li>
