@@ -6,20 +6,20 @@
         <i class="mdi mdi-account-multiple menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">
+    <li class="nav-item" [ngClass]="{ 'active': openedTasks.isActive }">
+      <a class="nav-link" routerLink="/myOpenedTasks" routerLinkActive #openedTasks="routerLinkActive">
         <span class="menu-title">My Opened Tasks</span>
         <i class="mdi mdi-library menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">
+    <li class="nav-item" [ngClass]="{ 'active': completedTasks.isActive }">
+      <a class="nav-link" routerLink="/myCompletedTasks" routerLinkActive #completedTasks="routerLinkActive">
         <span class="menu-title">My Completed Tasks</span>
         <i class="mdi mdi-checkbox-marked-circle menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">
+    <li class="nav-item" [ngClass]="{ 'active': myTeamsTasks.isActive }">
+      <a class="nav-link" routerLink="/myTeams" routerLinkActive #myTeamsTasks="routerLinkActive">
         <span class="menu-title">My Teams Tasks</span>
         <i class="mdi mdi-format-list-bulleted menu-icon"></i>
       </a>
@@ -31,13 +31,13 @@
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ 'active': addGroup.isActive }">
-      <a class="nav-link" routerLink="/addGroup" routerLinkActive #addGroup="routerLinkActive" >
+      <a class="nav-link" routerLink="/addGroup" routerLinkActive #addGroup="routerLinkActive">
         <span class="menu-title">Add Group</span>
         <i class="mdi mdi-account-multiple-plus menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link">
+    <li class="nav-item" [ngClass]="{ 'active': userProfile.isActive }">
+      <a class="nav-link" routerLink="/userProfile" routerLinkActive #userProfile="routerLinkActive">
         <span class="menu-title">User Profile</span>
         <i class="mdi mdi-account-circle menu-icon"></i>
       </a>

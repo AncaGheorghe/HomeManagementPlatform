@@ -23,7 +23,7 @@ export class AddGroupComponent implements OnInit {
   manager: string;
   groupName: string;
   errorMessage = '';
-  fullname: string = '';
+  email: string = '';
   id: number = null;
   config = {};
   config2 = {};
@@ -76,8 +76,8 @@ export class AddGroupComponent implements OnInit {
 
     this.selectedUsersList = this.selectedUsers;
     for(let i = 0; i < this.selectedUsersList.length; i++){
-        this.usersDtoList[i] = new UserDto(this.id, this.fullname);
-        this.usersDtoList[i].email = this.selectedUsersList[i];
+      this.usersDtoList[i] = new UserDto(this.id, this.email);
+      this.usersDtoList[i].email = this.selectedUsersList[i];
       
 
      const foundUser = this.userDto.find((user) => {

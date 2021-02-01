@@ -26,6 +26,10 @@ import { AddGroupComponent } from './add-group/add-group.component';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import { MyGroupsComponent } from './my-groups/my-groups.component';
+import { MyTeamsComponent } from './my-teams/my-teams.component';
+import { MyOpenedTasksComponent } from './my-opened-tasks/my-opened-tasks.component';
+import { MyCompletedTasksComponent } from './my-completed-tasks/my-completed-tasks.component';
+import {SidebarModule} from 'ng-sidebar';
 
 @NgModule({
   declarations: [
@@ -39,10 +43,14 @@ import { MyGroupsComponent } from './my-groups/my-groups.component';
     AddTaskComponent,
     AddGroupComponent,
     MyGroupsComponent,
+    MyTeamsComponent,
+    MyOpenedTasksComponent,
+    MyCompletedTasksComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule,
+    SidebarModule.forRoot(),
     AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,

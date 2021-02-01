@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {UserDto} from '../models/user-dto';
 import {GroupDto} from '../models/group-dto';
 import {CreateTaskDto} from '../models/createTaskDto';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -23,7 +24,7 @@ export class AddTaskComponent implements OnInit {
   config = {};
   config3 = {};
   id: number = null;
-  fullname: string = '';
+  email: string = '';
   groupId: number = null;
   groupName: string = '';
   selectedUsers: string[];
@@ -46,7 +47,7 @@ export class AddTaskComponent implements OnInit {
   getGroupsUrl = environment.apiBase + '/groups';
   createTaskUrl = environment.apiBase + '/tasks/add-edit';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.selectedUsers = [];
     this.userDto = [];
     this.usersList = [];
@@ -170,7 +171,7 @@ export class AddTaskComponent implements OnInit {
   createTask(){
 
     for(let i = 0; i < this.selectedUsers.length; i++){
-      this.usersDtoList[i] = new UserDto(this.id, this.fullname);
+      this.usersDtoList[i] = new UserDto(this.id, this.email);
       this.usersDtoList[i].email = this.selectedUsers[i];
 
       const foundUser = this.userDto.find((user) => {
@@ -217,19 +218,10 @@ export class AddTaskComponent implements OnInit {
     this.createTask().subscribe(
       response => {
         console.log('something' + response);
+        this.router.navigate(['/home']);
       },
       err => {
         this.errorMessage = err.error.message;
-      }
-    );
-
-    this.refreshForm();
-  }
-
-  refreshForm(){
-    var resetForm = <HTMLFormElement>document.getElementById('addTask');
-    resetForm.reset();
-    this.selectedUsers = [];
-    this.selectedGroups = [];
+      });
   }
 }
