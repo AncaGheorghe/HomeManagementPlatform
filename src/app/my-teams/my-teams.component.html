@@ -9,15 +9,94 @@
     <div class="main-panel">
       <div class="content-wrapper">
 
-        <div class="row">
+        <ng-sidebar-container>
 
-        </div>
+          <!-- Page content -->
+          <div ng-sidebar-content>
+              <div class="row" style=" margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+                <div class="col-md-4 stretch-card grid-margin" *ngFor="let task of listOfTasks">
+                  <div class="card bg-gradient-primary card-img-holder text-white">
+                    <div class="card-body">
+                      <img src="{{circleImage}}" class="card-img-absolute" alt="circle-image" />
+                      <h4 class="font-weight-normal mb-3">{{task.status}} <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                      </h4>
+                      <h2 class="mb-5">{{task.title}}</h2>
+                      <p>{{task.content}}</p>
+                      <div class="button-align">
+                        <button class="btn btn-light mr-2" (click)="slideToggleSidebar(); takeId(task.id)">Edit</button>
+                        <button class="btn btn-light" (click)="deleteTask(task.id)">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <!-- A sidebar -->
+          <ng-sidebar [(opened)]="opened" position="right" mode="over" autoCollapseWidth=100>
+            <div class="card set-card">
+              <div class="card-body card-align">
+                <h4 class="card-title form-title">Edit Task</h4>
+                <form class="forms-sample"
+                      name="form"
+                      (ngSubmit)="f.form.valid"
+                      #f="ngForm"
+                      novalidate
+                      id="editTask">
+                  <div class="form-group2">
+                    <label for="exampleInputName1">Edit Task Name</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Task Name"
+                           name="inputGroupName" [(ngModel)]="inputGroupName">
+                  </div>
+                  <div class="form-group2">
+                    <label for="userDropdown">Edit Task Category</label>
+                    <ngx-select-dropdown id="userDropdown" name="category"
+                                         [config]="config2"
+                                         [options]="options"
+                                         [(ngModel)]="category">
+                    </ngx-select-dropdown>
+                  </div>
+                  <div class="form-group2">
+                    <label for="exampleTextarea1">What To Do</label>
+                    <textarea class="form-control" id="exampleTextarea1" rows="4" name="toDo" [(ngModel)]="whatToDo"></textarea>
+                  </div>
+                  <div class="form-group2">
+                    <label for="userDropdown2">Edit Assign Users</label>
+                    <ng-multiselect-dropdown id="userDropdown2" name="users"
+                                             [placeholder]="'Select Users'"
+                                             [settings]="config"
+                                             [data]="dropdownList"
+                                             [(ngModel)]="listForDropdownUsers"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             (onDeSelect)="onDeselect($event)"
+                                             (onDeSelectAll)="onDeSelectAll($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group2">
+                    <label for="userDropdown3">Edit Assign Group</label>
+                    <ng-multiselect-dropdown id="userDropdown3" name="groups"
+                                             [placeholder]="'Select Groups'"
+                                             [settings]="config3"
+                                             [data]="dropdownGroupsList"
+                                             [(ngModel)]="listForDropdownGroups"
+                                             (onSelect)="onItemSelect2($event)"
+                                             (onSelectAll)="onSelectAll2($event)"
+                                             (onDeSelect)="onDeselect2($event)"
+                                             (onDeSelectAll)="onDeSelectAll2($event)">
+                    </ng-multiselect-dropdown>
+                  </div>
+                  <div class="button-align">
+                    <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid" (click)="submit()">Edit Task</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </ng-sidebar>
+
+        </ng-sidebar-container>
       </div>
-      <!-- content-wrapper ends -->
-      <!-- partial -->
     </div>
-    <!-- main-panel ends -->
   </div>
-  <!-- page-body-wrapper ends -->
 </div>
-<!-- container-scroller -->
+

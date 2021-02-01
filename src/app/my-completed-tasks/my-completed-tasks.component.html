@@ -9,15 +9,20 @@
     <div class="main-panel">
       <div class="content-wrapper">
 
-        <div class="row">
-
+        <div class="row" style=" margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
+          <div class="col-md-3 stretch-card grid-margin" *ngFor="let task of listOfTasks">
+            <div class="card bg-gradient-primary card-img-holder text-white">
+              <div class="card-body">
+                <img src="{{circleImage}}" class="card-img-absolute" alt="circle-image" />
+                <h4 class="font-weight-normal mb-3">{{task.status}} <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                </h4>
+                <h2 class="mb-5">{{task.title}}</h2>
+                <p>{{task.content}}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- content-wrapper ends -->
-      <!-- partial -->
     </div>
-    <!-- main-panel ends -->
   </div>
-  <!-- page-body-wrapper ends -->
 </div>
-<!-- container-scroller -->
