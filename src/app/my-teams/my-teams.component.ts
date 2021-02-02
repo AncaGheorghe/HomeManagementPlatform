@@ -292,7 +292,7 @@ export class MyTeamsComponent implements OnInit {
     this.editTask().subscribe(
       response => {
         console.log('something' + response);
-        // this.reloadPage();
+        this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;
