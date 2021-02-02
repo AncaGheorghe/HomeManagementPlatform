@@ -17,7 +17,27 @@
                 <h4 class="font-weight-normal mb-3">{{task.status}} <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                 </h4>
                 <h2 class="mb-5">{{task.title}}</h2>
-                <p>{{task.content}}</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p>What to do: {{task.content}}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p>Assigned Users/Groups:</p>
+                    <div *ngIf="task.claimedBy === null">
+                      <ul *ngFor="let group of task.groups">
+                        <li>{{group.name}}</li>
+                        <ul *ngFor="let user of group.userDtoSet">
+                          <li>{{user.fullname}}</li>
+                        </ul>
+                      </ul>
+                    </div>
+                    <div class="mb-3" *ngIf="task.claimedBy != null">
+                      <ul>
+                        <li>{{task.claimedBy.fullname}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                 <div class="button-align">
                   <button class="btn btn-light mr-2" (click)="submitTask(task.id)" *ngIf="!isSubmitted">Submit</button>
                   <button class="btn btn-light" (click)="claimTask(task.id)" *ngIf="task.isClaimed && !isClaimed">Claim</button>
