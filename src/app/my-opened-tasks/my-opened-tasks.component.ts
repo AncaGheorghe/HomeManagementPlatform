@@ -50,9 +50,11 @@ export class MyOpenedTasksComponent implements OnInit {
   }
 
   claimTask(id: number){
+    console.log("claim heree")
    this.http.post(this.claimTaskUrl + id, {}).subscribe(response => {
      console.log('cevaaaaa' + response);
      this.isClaimed = true;
+     this.reloadPage();
    });
   }
 

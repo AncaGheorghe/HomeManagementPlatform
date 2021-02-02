@@ -87,8 +87,13 @@ export class MyGroupsComponent implements OnInit {
     this.opened = !this.opened;
   }
 
+  public closeSidebar(){
+    this.opened = false;
+  }
+
   takeId(groupName: string){
 
+    console.log("takeIs" + groupName)
     const group = this.groupDto2.find((group) => {
       return group.name === groupName;
     });
@@ -97,6 +102,7 @@ export class MyGroupsComponent implements OnInit {
       this.idForGroups = group.id;
       this.groupName = groupName;
 
+      this.selectedUsers = [];
       for (let i = 0; i < group.userDtoSet.length; i++){
         this.selectedUsers.push(group.userDtoSet[i].email);
 
@@ -134,14 +140,21 @@ export class MyGroupsComponent implements OnInit {
     });
 
     if(!alreadyManagerInUsersList){
-      this.selectedUsers.push(this.manager);
+      if(this.manager.length > 0){
+        console.log("manager" + this.manager);
+        this.selectedUsers.push(this.manager);
+      }
     }
 
     this.selectedUsersList = this.selectedUsers;
+    console.log("selected users " + this.selectedUsersList);
+    console.log("selected users " + this.selectedUsersList.length);
     for(let i = 0; i < this.selectedUsersList.length; i++){
+      console.log ("i" + i)
       this.usersDtoList[i] = new UserDto(this.id, this.email);
       this.usersDtoList[i].email = this.selectedUsersList[i];
 
+      console.log(" this.usersDtoList" +  this.usersDtoList)
 
       const foundUser = this.userDto.find((user) => {
         return user.email === this.selectedUsersList[i];
@@ -163,7 +176,9 @@ export class MyGroupsComponent implements OnInit {
     this.groupDto.id = this.idForGroups;
 
     if(!alreadyManagerInUsersList){
-      this.selectedUsers.push(this.manager);
+      if(this.manager.length > 0){
+        this.selectedUsers.push(this.manager);
+      }
     }
 
     return this.http.post(this.postGroupUrl, this.groupDto);

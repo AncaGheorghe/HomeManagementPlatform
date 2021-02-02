@@ -111,6 +111,10 @@ export class MyTeamsComponent implements OnInit {
     this.opened = !this.opened;
   }
 
+  public closeSidebar() {
+    this.opened = false;
+  }
+
 
   takeId(taskId: number){
 
@@ -124,6 +128,7 @@ export class MyTeamsComponent implements OnInit {
       this.category = task.category;
       this.whatToDo = task.content;
 
+      this.selectedUsers =[];
       for (let i = 0; i < task.users.length; i++){
         this.selectedUsers.push(task.users[i].email);
         console.log("teeest2  " + this.selectedUsers);
@@ -131,6 +136,7 @@ export class MyTeamsComponent implements OnInit {
         console.log("teeest345  " + this.listForDropdownUsers);
       }
 
+      this.selectedGroups = [];
       for (let i = 0; i < task.groups.length; i++){
         this.selectedGroups.push(task.groups[i].name);
         console.log("teeest2  " + this.selectedGroups);
@@ -286,7 +292,7 @@ export class MyTeamsComponent implements OnInit {
     this.editTask().subscribe(
       response => {
         console.log('something' + response);
-        this.reloadPage();
+        // this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;

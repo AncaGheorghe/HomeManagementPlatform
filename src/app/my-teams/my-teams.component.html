@@ -16,8 +16,7 @@
               <div class="row" style=" margin-top: 112px; margin-right: unset!important; margin-left: unset!important;">
                 <div class="col-md-4 stretch-card grid-margin" *ngFor="let task of listOfTasks">
                   <div class="card bg-gradient-primary card-img-holder text-white">
-                    <div class="card-body">
-                      <img src="{{circleImage}}" class="card-img-absolute" alt="circle-image" />
+                    <div class="card-body" style="background-image: url({{circleImage}});">
                       <h4 class="font-weight-normal mb-3">{{task.status}} <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                       </h4>
                       <h2 class="mb-5">{{task.title}}</h2>
@@ -43,7 +42,7 @@
                         </div>
                       </div>
                       <div class="button-align">
-                        <button class="btn btn-light mr-2" (click)="slideToggleSidebar(); takeId(task.id)">Edit</button>
+                        <button *ngIf="task.status != 'COMPLETED'" class="btn btn-light mr-2" (click)="slideToggleSidebar(); takeId(task.id)">Edit</button>
                         <button class="btn btn-light" (click)="deleteTask(task.id)">Delete</button>
                       </div>
                     </div>
@@ -108,6 +107,7 @@
                   </div>
                   <div class="button-align">
                     <button type="submit" class="btn btn-gradient-primary mr-2" [disabled]="!f.form.valid" (click)="submit()">Edit Task</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" (click)="closeSidebar()">Close</button>
                   </div>
                 </form>
               </div>

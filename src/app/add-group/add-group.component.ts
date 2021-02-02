@@ -39,6 +39,7 @@ export class AddGroupComponent implements OnInit {
     this.selectedUsers = [];
     this.usersDtoList = [];
     this.selectedUsersList = [];
+    this.manager = null;
   }
 
   ngOnInit() {
@@ -71,7 +72,9 @@ export class AddGroupComponent implements OnInit {
     });
 
     if(!alreadyManagerInUsersList){
-      this.selectedUsers.push(this.manager);
+      if(this.manager.length > 0){
+        this.selectedUsers.push(this.manager);
+      }
     }
 
     this.selectedUsersList = this.selectedUsers;
